@@ -24,37 +24,26 @@ jobs:
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
     
-    - name: Cache Gradle packages
-      uses: actions/cache@v4
-      with:
-        path: |
-          ~/.gradle/caches
-          ~/.gradle/wrapper
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-
-    
-    - name: Setup Gradle
-      uses: gradle/gradle-build-action@v2
-      with:
-        gradle-version: 8.2
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
     
     - name: Build Debug APK
-      run: gradle assembleDebug --stacktrace || ./gradlew assembleDebug --stacktrace || true
+      run: ./gradlew assembleDebug --stacktrace
       continue-on-error: true
     
-    - name: Find APK
+    - name: Check build output
       run: |
-        find . -name "*.apk" -type f 2>/dev/null | head -5
-        mkdir -p app/build/outputs/apk/debug
-        mkdir -p app/build/outputs/apk/release
+        echo "Looking for APK files..."
+        find . -name "*.apk" -type f 2>/dev/null || echo "No APKs found"
+        ls -la app/build/outputs/apk/debug/ 2>/dev/null || echo "Debug dir not found"
     
     - name: Upload Debug APK
       uses: actions/upload-artifact@v4
+      if: always()
       with:
         name: kimi-voice-debug
         path: |
-          **/*.apk
           app/build/outputs/apk/**/*.apk
+          **/*.apk
         retention-days: 30
         if-no-files-found: warn
