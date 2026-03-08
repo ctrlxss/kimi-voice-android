@@ -1,0 +1,21 @@
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Kimi Voice</string>
+
+    <!-- Colors -->
+    <color name="primary">#FF6B6B</color>
+    <color name="primary_dark">#EE5A5A</color>
+    <color name="background">#121212</color>
+    <color name="surface">#1E1E1E</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#B3B3B3</color>
+    <color name="accent">#4CAF50</color>
+
+    <!-- Theme -->
+    <style name="Theme.KimiVoice" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:windowBackground">@color/background</item>
+    </style>
+</resources>
