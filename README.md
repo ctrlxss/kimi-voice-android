@@ -189,4 +189,4 @@ Roboter-Stimme, sehr synthetisch.
 
 ## Lizenz
 
-Privates Projekt für Max ❤️‍🔥
+Privates Projekt für Max ❤️‍🔥# Build Status
